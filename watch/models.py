@@ -23,3 +23,24 @@ class Mtaa(models.Model):
 
     def __str__(self):
         return f'{self.mtaa_name}'
+
+class UserProfile(models.Model):
+    first_name = models.CharField(max_length=20,blank=True)
+    last_name = models.CharField(max_length=20,blank=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    location = models.CharField(max_length=30,blank=True)
+    mtaa_name = models.ForeignKey('Mtaa',on_delete=models.CASCADE,null=True,blank=True)
+
+    def assign_mtaa(self,mtaa):
+        self.mtaa= mtaa
+        self.save()
+
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+    def __str__(self):
+        return f'{self.user.username}'
+
