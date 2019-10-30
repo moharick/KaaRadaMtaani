@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Mtaa(models.Model):
@@ -68,3 +69,13 @@ class Biz(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+class Post(models.Model):
+    title = models.CharField(max_length=40)
+    post_description = HTMLField()
+    posted_by = models.ForeignKey(User,on_delete=models.CASCADE)
+    post_hood = models.ForeignKey('Mtaa',on_delete=models.CASCADE)
+    posted_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.title},{self.post_hood.mtaa_name}'
