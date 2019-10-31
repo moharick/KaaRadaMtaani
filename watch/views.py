@@ -66,3 +66,24 @@ def mtaa(request,mtaa_id):
 
         posts = Post.objects.filter(post_hood = mtaa).all()
         return render(request,'mtaa.html',{'posts':posts,'form':form,'user':user,'bizs':bizs,'mtaa':mtaa,})
+
+
+def profile(request,user_id):
+    user = User.objects.get(id = user_id)
+    profile = UserProfile.objects.filter(user = user).first()
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST,instance=profile)
+        if form.is_valid():
+            profile.first_name = request.POST['first_name']
+            profile.last_name = request.POST['last_name']
+            profile.save()
+        return redirect(reverse('profile',args=[user.id]))
+    else:
+        form = UpdateProfileForm(instance=profile)
+
+    bizs = Biz.objects.filter(owner = user).all()
+    mtaas = Mtaa.objects.all()
+
+    return render(request,'profile.html',{'mtaas':mtaas,'bizs':bizs,'profile':profile,'form':form})
+
+
