@@ -2,6 +2,9 @@
 {% load bootstrap4 %}
 {% block content %}
 <style>
+    body{
+        font-size: 18px;
+    }
     li {
         display: none;
     }
@@ -14,8 +17,7 @@
     <div id="login-overlay" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-
-                <h4 class="modal-title" id="myModalLabel">Mtaa</h4>
+                <h4 class="modal-title" style="margin-left: 225px; font-size: 18px;" id="myModalLabel">Mtaa</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -26,7 +28,7 @@
                                 {% bootstrap_form form %}
                                 <div class="form-group">
                                     {% block button%}
-                                    <button type="submit" class="btn btn-info">Sign Up</button>
+                                    <button type="submit" class="btn btn-info" style="font-size: 15px;">Register</button>
                                     {% endblock %}
                                 </div>
                             </form>
