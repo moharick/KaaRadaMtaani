@@ -13,7 +13,7 @@ import datetime
 
 def home(request):
     if not request.user.is_authenticated:
-        return redirect('signout')
+        return redirect('login')
     else:
         if request.user.id == 1:
             if request.method == 'POST':
