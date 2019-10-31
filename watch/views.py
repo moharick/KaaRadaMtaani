@@ -87,3 +87,28 @@ def profile(request,user_id):
     return render(request,'profile.html',{'mtaas':mtaas,'bizs':bizs,'profile':profile,'form':form})
 
 
+def add_biz(request):
+    user = User.objects.filter(id = request.user.id).first()
+    profile = UserProfile.objects.filter(user = user).first()
+    if request.method == 'POST':
+        biz_form = AddBizForm(request.POST)
+        if biz_form.is_valid():
+            biz = Biz(name = request.POST['name'],owner = user,biz_mtaa = profile.mtaa,email=request.POST['email'])
+            biz.save()
+        return redirect(reverse('profile',args=[user.id]))
+    else:
+        biz_form = AddBizForm()
+    return render(request,'biz.html',{'biz_form':biz_form})
+
+
+
+def search(request):
+    try:
+        if 'biz' in request.GET and request.GET['biz']:
+            search_term = request.GET.get('biz')
+            searched_biz = Biz.objects.get(name__icontains=search_term)
+            return render(request,'search.html',{'searched_biz':searched_biz})
+    except (ValueError,Biz.DoesNotExist):
+        message = "Oops! We couldn't find the biz you're looking for."
+        return render(request,'search.html',{'message':message})
+    return render(request,'search.html',{'message':message,'searched_business':searched_biz})
