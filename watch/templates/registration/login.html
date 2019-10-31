@@ -2,12 +2,16 @@
 {% load bootstrap4 %}
 {% load static %}
 {% block content %}
-
+<style>
+body{
+    font-size: 18px;
+}
+</style>
 <body>
     <div id="login-overlay" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Mtaani</h4>
+                <h4 class="modal-title" id="myModalLabel" style="margin-left: 225px; font-size: 18px;" >Mtaani</h4>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -34,21 +38,21 @@
                                         <input type="checkbox" name="remember" id="remember"> Remember login
                                     </label>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-block"> <a href="{% url 'home' %}">Sign
+                                <button type="submit" class="btn btn-success btn-block" style="font-size: 15px;"> <a href="{% url 'home' %}">Sign
                                         In</a></button>
 
                             </form>
                         </div>
                     </div>
                     <div class="col-xs-6">
-                        <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                        <p class="lead" style="font-size: 15px;">Register now for <span class="text-success">FREE</span></p>
                         <ul class="list-unstyled" style="line-height: 2">
                             <li><span class="fa fa-check text-success"></span> See all posts for mtaa</li>
                             <li><span class="fa fa-check text-success"></span> Fast notifications</li>
                             <li><span class="fa fa-check text-success"></span> Give feedback</li>
                             <li><span class="fa fa-check text-success"></span> Change location</li>
                         </ul>
-                        <p><a href="/accounts/register" class="btn btn-info btn-block">Register now!</a></p>
+                        <p><a href="/accounts/register" class="btn btn-info btn-block" style="font-size: 15px;">Register now!</a></p>
                     </div>
                 </div>
             </div>
