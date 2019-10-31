@@ -7,6 +7,7 @@ from django.urls import reverse
 from .models import *
 from .forms import *
 from django.contrib.auth.models import User
+import datetime
 
 # Create your views here.
 
@@ -37,3 +38,31 @@ def home(request):
             else:
                 user = UserProfile.objects.filter(user = request.user).first()
                 return redirect(reverse('mtaa',args=[user.mtaa_name.id]))
+
+def signout(request):
+    logout(request)
+    return redirect('/accounts/login')
+
+def mtaa(request,mtaa_id):
+    if request.user.id == 1:
+        mtaa = Mtaa.objects.get(id = mtaa_id)
+        members = UserProfile.objects.filter(mtaa = mtaa).all()
+        return render(request,'mtaa.html',{'mtaa':mtaa,'members':members})
+    else:
+        mtaa = Mtaa.objects.get(id = mtaa_id)
+        user = UserProfile.objects.filter(user = request.user).first()
+        bizs = Biz.objects.filter(biz_mtaa=mtaa).all()
+        user.mtaa = mtaa
+        user.save()
+
+        if request.method == "POST":
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = Post(title=request.POST['title'],post_description=request.POST['post_description'],posted_by=request.user,post_hood=mtaa,posted_on=datetime.datetime.now())
+                post.save()
+                return redirect(reverse('mtaa',args=[mtaa.id]))
+        else:
+            form = PostForm()
+
+        posts = Post.objects.filter(post_hood = mtaa).all()
+        return render(request,'mtaa.html',{'posts':posts,'form':form,'user':user,'bizs':bizs,'mtaa':mtaa,})
