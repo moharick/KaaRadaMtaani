@@ -21,11 +21,11 @@ def home(request):
                 if form.is_valid():
                     mtaa = Mtaa(mtaa_name=request.POST['mtaa_name'])
                     mtaa.save()
-                return redirect('index')
+                return redirect('home')
             else:
                 form = MtaaForm()
             mtaas = Mtaa.objects.all()
-            return render(request,'index.html',{'mtaas':mtaas,'form':form})
+            return render(request,'home.html',{'mtaas':mtaas,'form':form})
         elif request.user != 1:
             user = UserProfile.objects.filter(user = request.user).first()
             if user is None:
@@ -34,7 +34,7 @@ def home(request):
             if user.mtaa_name is None:
                 title = 'mtaa'
                 mtaas = Mtaa.objects.all()
-                return render(request,'index.html',{'mtaas':mtaas})
+                return render(request,'home.html',{'mtaas':mtaas})
             else:
                 user = UserProfile.objects.filter(user = request.user).first()
                 return redirect(reverse('mtaa',args=[user.mtaa_name.id]))
