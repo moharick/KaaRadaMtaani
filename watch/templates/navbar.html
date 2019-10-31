@@ -1,0 +1,34 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" />
+<style>
+       nav{
+          font-family: 'Titillium Web', sans-serif;
+        }
+        </style>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" style="margin-bottom:15%;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse bg-inverse" id="navbarCollapse">
+        <a class="navbar-brand" href="/">Mtaani <i class="fas fa-city"></i></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' request.user.id %}">My Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="">Logout</a>
+            </li>
+        </ul>
+        <form class="mb-0 h1 ml-auto mr-auto" id="searchform" >
+                <input name="search" autocomplete="off" id="searching" class="form-control d-none d-md-block" placeholder="Search">
+               <i class="spinner "></i>
+           </form>
+    </div>
+</nav>
