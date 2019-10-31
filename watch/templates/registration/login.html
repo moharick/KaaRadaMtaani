@@ -1,0 +1,61 @@
+{%extends 'registration/base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<body>
+    <div id="login-overlay" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Mtaani</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="well">
+                            <form id="loginForm" method="POST" action="/accounts/login/" novalidate="novalidate">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="username" class="control-label">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" value=""
+                                        required="" title="Please enter you username" placeholder="example@gmail.com">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="control-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                        required="" title="Please enter your password">
+                                    <span class="help-block"></span>
+                                </div>
+                                <div id="loginErrorMsg" class="alert alert-error hide">Wrong username or password</div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" id="remember"> Remember login
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block"> <a href="{% url 'home' %}">Sign
+                                        In</a></button>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p class="lead">Register now for <span class="text-success">FREE</span></p>
+                        <ul class="list-unstyled" style="line-height: 2">
+                            <li><span class="fa fa-check text-success"></span> See all posts for mtaa</li>
+                            <li><span class="fa fa-check text-success"></span> Fast notifications</li>
+                            <li><span class="fa fa-check text-success"></span> Give feedback</li>
+                            <li><span class="fa fa-check text-success"></span> Change location</li>
+                        </ul>
+                        <p><a href="/accounts/register" class="btn btn-info btn-block">Register now!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <body>
+
+        </html>
+        {% endblock %}
